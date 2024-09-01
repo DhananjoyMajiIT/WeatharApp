@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Weather Dashboard</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+	<h1>Weather Dashboard</h1>
+	<div class="clock">
+		<span th:text="${#temporals.format(now, 'HH:mm:ss')}">00:00:00</span>
+	</div>
+	<form th:action="@{/api/weather}" method="get">
+		<input type="text" name="city" placeholder="Enter city">
+		<button type="submit">Search</button>
+	</form>
+	<div th:if="${weatherData != null}">
+			<h2 th:text="${weatherData.city}">City</h2>
+			<p th:text="${weatherData.temperature} + '°C'">Temperature</p>
+			<p th:text="${weatherData.humidity} + '% '">Humidity</p>
+	     	<p th:text="${weatherData.timestamp}">Timestamp</p>
+	</div>
+
+</div>
+</body>
+</html>
